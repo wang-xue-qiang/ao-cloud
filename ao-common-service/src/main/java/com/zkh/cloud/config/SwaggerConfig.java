@@ -45,7 +45,7 @@ public class SwaggerConfig {
 	//构建api文档的详细信息方法
 	private  ApiInfo apiInfo(){
 		  return new ApiInfoBuilder()
-		      .title("上海震坤行AO派单系统RestFulApi")		  //页面标题
+		      .title("AO派单系统RestFulApi")		  //页面标题
 		      .contact(new Contact("Allen","","592470261@qq.com"))//创建人
 		      .version("1.0")  //版本号
 		      .description("AO派单系统相关Api")
