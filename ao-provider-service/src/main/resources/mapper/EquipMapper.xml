@@ -1,0 +1,760 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zkh.cloud.dao.EquipMapper" >
+  <resultMap id="BaseResultMap" type="com.zkh.cloud.bean.Equip" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="enable" property="enable" jdbcType="INTEGER" />
+    <result column="equip_name" property="equipName" jdbcType="VARCHAR" />
+    <result column="equip_no" property="equipNo" jdbcType="VARCHAR" />
+    <result column="cus_id" property="cusId" jdbcType="VARCHAR" />
+    <result column="brand_id" property="brandId" jdbcType="VARCHAR" />
+    <result column="equip_type" property="equipType" jdbcType="VARCHAR" />
+    <result column="group_id" property="groupId" jdbcType="VARCHAR" />
+    <result column="termi_seq" property="termiSeq" jdbcType="VARCHAR" />
+    <result column="termi_mac" property="termiMac" jdbcType="VARCHAR" />
+    <result column="ownership" property="ownership" jdbcType="INTEGER" />
+    <result column="owner_name" property="ownerName" jdbcType="VARCHAR" />
+    <result column="usageship" property="usageship" jdbcType="INTEGER" />
+    <result column="usage_name" property="usageName" jdbcType="VARCHAR" />
+    <result column="model_no" property="modelNo" jdbcType="VARCHAR" />
+    <result column="serial_no" property="serialNo" jdbcType="VARCHAR" />
+    <result column="use_rate" property="useRate" jdbcType="VARCHAR" />
+    <result column="power_rate" property="powerRate" jdbcType="VARCHAR" />
+    <result column="open_date" property="openDate" jdbcType="TIMESTAMP" />
+    <result column="factory_date" property="factoryDate" jdbcType="TIMESTAMP" />
+    <result column="equip_size" property="equipSize" jdbcType="VARCHAR" />
+    <result column="cont_name" property="contName" jdbcType="VARCHAR" />
+    <result column="cont_mobile" property="contMobile" jdbcType="VARCHAR" />
+    <result column="running_state" property="runningState" jdbcType="VARCHAR" />
+    <result column="repair_state" property="repairState" jdbcType="VARCHAR" />
+    <result column="maint_state" property="maintState" jdbcType="VARCHAR" />
+    <result column="exhaust" property="exhaust" jdbcType="VARCHAR" />
+    <result column="press_level" property="pressLevel" jdbcType="VARCHAR" />
+    <result column="comp_type" property="compType" jdbcType="VARCHAR" />
+    <result column="comp_no" property="compNo" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="CHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, enable, equip_name, equip_no, cus_id, brand_id, equip_type, group_id, termi_seq, 
+    termi_mac, ownership, owner_name, usageship, usage_name, model_no, serial_no, use_rate, 
+    power_rate, open_date, factory_date, equip_size, cont_name, cont_mobile, running_state, 
+    repair_state, maint_state, exhaust, press_level, comp_type, comp_no, remark, create_by, 
+    create_date, update_by, remarks, del_flag, update_date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zkh.cloud.bean.EquipExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ao_equip
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ao_equip
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ao_equip
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zkh.cloud.bean.EquipExample" >
+    delete from ao_equip
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zkh.cloud.bean.Equip" >
+    insert into ao_equip (id, enable, equip_name, 
+      equip_no, cus_id, brand_id, 
+      equip_type, group_id, termi_seq, 
+      termi_mac, ownership, owner_name, 
+      usageship, usage_name, model_no, 
+      serial_no, use_rate, power_rate, 
+      open_date, factory_date, equip_size, 
+      cont_name, cont_mobile, running_state, 
+      repair_state, maint_state, exhaust, 
+      press_level, comp_type, comp_no, 
+      remark, create_by, create_date, 
+      update_by, remarks, del_flag, 
+      update_date)
+    values (#{id,jdbcType=VARCHAR}, #{enable,jdbcType=INTEGER}, #{equipName,jdbcType=VARCHAR}, 
+      #{equipNo,jdbcType=VARCHAR}, #{cusId,jdbcType=VARCHAR}, #{brandId,jdbcType=VARCHAR}, 
+      #{equipType,jdbcType=VARCHAR}, #{groupId,jdbcType=VARCHAR}, #{termiSeq,jdbcType=VARCHAR}, 
+      #{termiMac,jdbcType=VARCHAR}, #{ownership,jdbcType=INTEGER}, #{ownerName,jdbcType=VARCHAR}, 
+      #{usageship,jdbcType=INTEGER}, #{usageName,jdbcType=VARCHAR}, #{modelNo,jdbcType=VARCHAR}, 
+      #{serialNo,jdbcType=VARCHAR}, #{useRate,jdbcType=VARCHAR}, #{powerRate,jdbcType=VARCHAR}, 
+      #{openDate,jdbcType=TIMESTAMP}, #{factoryDate,jdbcType=TIMESTAMP}, #{equipSize,jdbcType=VARCHAR}, 
+      #{contName,jdbcType=VARCHAR}, #{contMobile,jdbcType=VARCHAR}, #{runningState,jdbcType=VARCHAR}, 
+      #{repairState,jdbcType=VARCHAR}, #{maintState,jdbcType=VARCHAR}, #{exhaust,jdbcType=VARCHAR}, 
+      #{pressLevel,jdbcType=VARCHAR}, #{compType,jdbcType=VARCHAR}, #{compNo,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, #{delFlag,jdbcType=CHAR}, 
+      #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zkh.cloud.bean.Equip" >
+    insert into ao_equip
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="enable != null" >
+        enable,
+      </if>
+      <if test="equipName != null" >
+        equip_name,
+      </if>
+      <if test="equipNo != null" >
+        equip_no,
+      </if>
+      <if test="cusId != null" >
+        cus_id,
+      </if>
+      <if test="brandId != null" >
+        brand_id,
+      </if>
+      <if test="equipType != null" >
+        equip_type,
+      </if>
+      <if test="groupId != null" >
+        group_id,
+      </if>
+      <if test="termiSeq != null" >
+        termi_seq,
+      </if>
+      <if test="termiMac != null" >
+        termi_mac,
+      </if>
+      <if test="ownership != null" >
+        ownership,
+      </if>
+      <if test="ownerName != null" >
+        owner_name,
+      </if>
+      <if test="usageship != null" >
+        usageship,
+      </if>
+      <if test="usageName != null" >
+        usage_name,
+      </if>
+      <if test="modelNo != null" >
+        model_no,
+      </if>
+      <if test="serialNo != null" >
+        serial_no,
+      </if>
+      <if test="useRate != null" >
+        use_rate,
+      </if>
+      <if test="powerRate != null" >
+        power_rate,
+      </if>
+      <if test="openDate != null" >
+        open_date,
+      </if>
+      <if test="factoryDate != null" >
+        factory_date,
+      </if>
+      <if test="equipSize != null" >
+        equip_size,
+      </if>
+      <if test="contName != null" >
+        cont_name,
+      </if>
+      <if test="contMobile != null" >
+        cont_mobile,
+      </if>
+      <if test="runningState != null" >
+        running_state,
+      </if>
+      <if test="repairState != null" >
+        repair_state,
+      </if>
+      <if test="maintState != null" >
+        maint_state,
+      </if>
+      <if test="exhaust != null" >
+        exhaust,
+      </if>
+      <if test="pressLevel != null" >
+        press_level,
+      </if>
+      <if test="compType != null" >
+        comp_type,
+      </if>
+      <if test="compNo != null" >
+        comp_no,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null" >
+        #{enable,jdbcType=INTEGER},
+      </if>
+      <if test="equipName != null" >
+        #{equipName,jdbcType=VARCHAR},
+      </if>
+      <if test="equipNo != null" >
+        #{equipNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cusId != null" >
+        #{cusId,jdbcType=VARCHAR},
+      </if>
+      <if test="brandId != null" >
+        #{brandId,jdbcType=VARCHAR},
+      </if>
+      <if test="equipType != null" >
+        #{equipType,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null" >
+        #{groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="termiSeq != null" >
+        #{termiSeq,jdbcType=VARCHAR},
+      </if>
+      <if test="termiMac != null" >
+        #{termiMac,jdbcType=VARCHAR},
+      </if>
+      <if test="ownership != null" >
+        #{ownership,jdbcType=INTEGER},
+      </if>
+      <if test="ownerName != null" >
+        #{ownerName,jdbcType=VARCHAR},
+      </if>
+      <if test="usageship != null" >
+        #{usageship,jdbcType=INTEGER},
+      </if>
+      <if test="usageName != null" >
+        #{usageName,jdbcType=VARCHAR},
+      </if>
+      <if test="modelNo != null" >
+        #{modelNo,jdbcType=VARCHAR},
+      </if>
+      <if test="serialNo != null" >
+        #{serialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="useRate != null" >
+        #{useRate,jdbcType=VARCHAR},
+      </if>
+      <if test="powerRate != null" >
+        #{powerRate,jdbcType=VARCHAR},
+      </if>
+      <if test="openDate != null" >
+        #{openDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="factoryDate != null" >
+        #{factoryDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="equipSize != null" >
+        #{equipSize,jdbcType=VARCHAR},
+      </if>
+      <if test="contName != null" >
+        #{contName,jdbcType=VARCHAR},
+      </if>
+      <if test="contMobile != null" >
+        #{contMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="runningState != null" >
+        #{runningState,jdbcType=VARCHAR},
+      </if>
+      <if test="repairState != null" >
+        #{repairState,jdbcType=VARCHAR},
+      </if>
+      <if test="maintState != null" >
+        #{maintState,jdbcType=VARCHAR},
+      </if>
+      <if test="exhaust != null" >
+        #{exhaust,jdbcType=VARCHAR},
+      </if>
+      <if test="pressLevel != null" >
+        #{pressLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="compType != null" >
+        #{compType,jdbcType=VARCHAR},
+      </if>
+      <if test="compNo != null" >
+        #{compNo,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zkh.cloud.bean.EquipExample" resultType="java.lang.Integer" >
+    select count(*) from ao_equip
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ao_equip
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enable != null" >
+        enable = #{record.enable,jdbcType=INTEGER},
+      </if>
+      <if test="record.equipName != null" >
+        equip_name = #{record.equipName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.equipNo != null" >
+        equip_no = #{record.equipNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cusId != null" >
+        cus_id = #{record.cusId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandId != null" >
+        brand_id = #{record.brandId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.equipType != null" >
+        equip_type = #{record.equipType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupId != null" >
+        group_id = #{record.groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.termiSeq != null" >
+        termi_seq = #{record.termiSeq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.termiMac != null" >
+        termi_mac = #{record.termiMac,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ownership != null" >
+        ownership = #{record.ownership,jdbcType=INTEGER},
+      </if>
+      <if test="record.ownerName != null" >
+        owner_name = #{record.ownerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usageship != null" >
+        usageship = #{record.usageship,jdbcType=INTEGER},
+      </if>
+      <if test="record.usageName != null" >
+        usage_name = #{record.usageName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelNo != null" >
+        model_no = #{record.modelNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serialNo != null" >
+        serial_no = #{record.serialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.useRate != null" >
+        use_rate = #{record.useRate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.powerRate != null" >
+        power_rate = #{record.powerRate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openDate != null" >
+        open_date = #{record.openDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.factoryDate != null" >
+        factory_date = #{record.factoryDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.equipSize != null" >
+        equip_size = #{record.equipSize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contName != null" >
+        cont_name = #{record.contName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contMobile != null" >
+        cont_mobile = #{record.contMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.runningState != null" >
+        running_state = #{record.runningState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.repairState != null" >
+        repair_state = #{record.repairState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maintState != null" >
+        maint_state = #{record.maintState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exhaust != null" >
+        exhaust = #{record.exhaust,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pressLevel != null" >
+        press_level = #{record.pressLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.compType != null" >
+        comp_type = #{record.compType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.compNo != null" >
+        comp_no = #{record.compNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createBy != null" >
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateBy != null" >
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null" >
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null" >
+        del_flag = #{record.delFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.updateDate != null" >
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ao_equip
+    set id = #{record.id,jdbcType=VARCHAR},
+      enable = #{record.enable,jdbcType=INTEGER},
+      equip_name = #{record.equipName,jdbcType=VARCHAR},
+      equip_no = #{record.equipNo,jdbcType=VARCHAR},
+      cus_id = #{record.cusId,jdbcType=VARCHAR},
+      brand_id = #{record.brandId,jdbcType=VARCHAR},
+      equip_type = #{record.equipType,jdbcType=VARCHAR},
+      group_id = #{record.groupId,jdbcType=VARCHAR},
+      termi_seq = #{record.termiSeq,jdbcType=VARCHAR},
+      termi_mac = #{record.termiMac,jdbcType=VARCHAR},
+      ownership = #{record.ownership,jdbcType=INTEGER},
+      owner_name = #{record.ownerName,jdbcType=VARCHAR},
+      usageship = #{record.usageship,jdbcType=INTEGER},
+      usage_name = #{record.usageName,jdbcType=VARCHAR},
+      model_no = #{record.modelNo,jdbcType=VARCHAR},
+      serial_no = #{record.serialNo,jdbcType=VARCHAR},
+      use_rate = #{record.useRate,jdbcType=VARCHAR},
+      power_rate = #{record.powerRate,jdbcType=VARCHAR},
+      open_date = #{record.openDate,jdbcType=TIMESTAMP},
+      factory_date = #{record.factoryDate,jdbcType=TIMESTAMP},
+      equip_size = #{record.equipSize,jdbcType=VARCHAR},
+      cont_name = #{record.contName,jdbcType=VARCHAR},
+      cont_mobile = #{record.contMobile,jdbcType=VARCHAR},
+      running_state = #{record.runningState,jdbcType=VARCHAR},
+      repair_state = #{record.repairState,jdbcType=VARCHAR},
+      maint_state = #{record.maintState,jdbcType=VARCHAR},
+      exhaust = #{record.exhaust,jdbcType=VARCHAR},
+      press_level = #{record.pressLevel,jdbcType=VARCHAR},
+      comp_type = #{record.compType,jdbcType=VARCHAR},
+      comp_no = #{record.compNo,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      del_flag = #{record.delFlag,jdbcType=CHAR},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zkh.cloud.bean.Equip" >
+    update ao_equip
+    <set >
+      <if test="enable != null" >
+        enable = #{enable,jdbcType=INTEGER},
+      </if>
+      <if test="equipName != null" >
+        equip_name = #{equipName,jdbcType=VARCHAR},
+      </if>
+      <if test="equipNo != null" >
+        equip_no = #{equipNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cusId != null" >
+        cus_id = #{cusId,jdbcType=VARCHAR},
+      </if>
+      <if test="brandId != null" >
+        brand_id = #{brandId,jdbcType=VARCHAR},
+      </if>
+      <if test="equipType != null" >
+        equip_type = #{equipType,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null" >
+        group_id = #{groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="termiSeq != null" >
+        termi_seq = #{termiSeq,jdbcType=VARCHAR},
+      </if>
+      <if test="termiMac != null" >
+        termi_mac = #{termiMac,jdbcType=VARCHAR},
+      </if>
+      <if test="ownership != null" >
+        ownership = #{ownership,jdbcType=INTEGER},
+      </if>
+      <if test="ownerName != null" >
+        owner_name = #{ownerName,jdbcType=VARCHAR},
+      </if>
+      <if test="usageship != null" >
+        usageship = #{usageship,jdbcType=INTEGER},
+      </if>
+      <if test="usageName != null" >
+        usage_name = #{usageName,jdbcType=VARCHAR},
+      </if>
+      <if test="modelNo != null" >
+        model_no = #{modelNo,jdbcType=VARCHAR},
+      </if>
+      <if test="serialNo != null" >
+        serial_no = #{serialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="useRate != null" >
+        use_rate = #{useRate,jdbcType=VARCHAR},
+      </if>
+      <if test="powerRate != null" >
+        power_rate = #{powerRate,jdbcType=VARCHAR},
+      </if>
+      <if test="openDate != null" >
+        open_date = #{openDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="factoryDate != null" >
+        factory_date = #{factoryDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="equipSize != null" >
+        equip_size = #{equipSize,jdbcType=VARCHAR},
+      </if>
+      <if test="contName != null" >
+        cont_name = #{contName,jdbcType=VARCHAR},
+      </if>
+      <if test="contMobile != null" >
+        cont_mobile = #{contMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="runningState != null" >
+        running_state = #{runningState,jdbcType=VARCHAR},
+      </if>
+      <if test="repairState != null" >
+        repair_state = #{repairState,jdbcType=VARCHAR},
+      </if>
+      <if test="maintState != null" >
+        maint_state = #{maintState,jdbcType=VARCHAR},
+      </if>
+      <if test="exhaust != null" >
+        exhaust = #{exhaust,jdbcType=VARCHAR},
+      </if>
+      <if test="pressLevel != null" >
+        press_level = #{pressLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="compType != null" >
+        comp_type = #{compType,jdbcType=VARCHAR},
+      </if>
+      <if test="compNo != null" >
+        comp_no = #{compNo,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zkh.cloud.bean.Equip" >
+    update ao_equip
+    set enable = #{enable,jdbcType=INTEGER},
+      equip_name = #{equipName,jdbcType=VARCHAR},
+      equip_no = #{equipNo,jdbcType=VARCHAR},
+      cus_id = #{cusId,jdbcType=VARCHAR},
+      brand_id = #{brandId,jdbcType=VARCHAR},
+      equip_type = #{equipType,jdbcType=VARCHAR},
+      group_id = #{groupId,jdbcType=VARCHAR},
+      termi_seq = #{termiSeq,jdbcType=VARCHAR},
+      termi_mac = #{termiMac,jdbcType=VARCHAR},
+      ownership = #{ownership,jdbcType=INTEGER},
+      owner_name = #{ownerName,jdbcType=VARCHAR},
+      usageship = #{usageship,jdbcType=INTEGER},
+      usage_name = #{usageName,jdbcType=VARCHAR},
+      model_no = #{modelNo,jdbcType=VARCHAR},
+      serial_no = #{serialNo,jdbcType=VARCHAR},
+      use_rate = #{useRate,jdbcType=VARCHAR},
+      power_rate = #{powerRate,jdbcType=VARCHAR},
+      open_date = #{openDate,jdbcType=TIMESTAMP},
+      factory_date = #{factoryDate,jdbcType=TIMESTAMP},
+      equip_size = #{equipSize,jdbcType=VARCHAR},
+      cont_name = #{contName,jdbcType=VARCHAR},
+      cont_mobile = #{contMobile,jdbcType=VARCHAR},
+      running_state = #{runningState,jdbcType=VARCHAR},
+      repair_state = #{repairState,jdbcType=VARCHAR},
+      maint_state = #{maintState,jdbcType=VARCHAR},
+      exhaust = #{exhaust,jdbcType=VARCHAR},
+      press_level = #{pressLevel,jdbcType=VARCHAR},
+      comp_type = #{compType,jdbcType=VARCHAR},
+      comp_no = #{compNo,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=CHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  
+  <!-- 分页查询 add by  wangxueqiang  start -->
+  <select id="queryList" resultMap="BaseResultMap" parameterType="java.util.Map" >
+		select
+		<include refid="Base_Column_List" />
+		from ao_equip
+		<where>
+			<if test="equipName != null and equipName.trim() != ''">
+				and equip_name like concat('%',#{equipName},'%')
+			</if>
+		</where>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from ao_equip 
+		<where>
+			<if test="equipName != null and equipName.trim() != ''">
+				and equip_name like concat('%',#{equipName},'%')
+			</if>
+		</where>
+	</select>
+    <!-- 分页查询 add by  wangxueqiang  start -->   
+    
+    <!-- 批量删除 add by  wangxueqiang  start -->
+    <delete id="deleteBatch">
+		delete from ao_equip where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+    <!-- 批量删除add by  wangxueqiang  end -->
+  
+</mapper>

@@ -1,0 +1,16 @@
+server:
+  port: 8031
+spring:
+  application:
+    name: ao-hystrix-turbine
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://admin:123456@localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+turbine:
+  aggregator:
+    clusterConfig: default
+  appConfig: ao-user-service,ao-order-service
+  clusterNameExpression: "'default'"
