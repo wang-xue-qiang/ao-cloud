@@ -33,4 +33,7 @@ public interface UserFeignClient {
    
    @RequestMapping(value = "/user/register", method = RequestMethod.POST)
    public RespondResult registerUser(User user);
+   
+   @RequestMapping(value = "/user/sendCode", method = RequestMethod.GET)
+   public RespondResult sendCode(@RequestParam("emailOrPhone") String emailOrPhone);
 }

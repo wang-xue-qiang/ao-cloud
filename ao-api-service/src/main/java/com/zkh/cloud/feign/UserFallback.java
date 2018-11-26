@@ -46,4 +46,9 @@ public class UserFallback implements UserFeignClient {
 		return RespondResult.build(500, "调用失败，进行回调");
 	}
 
+	@Override
+	public RespondResult sendCode(String emailOrPhone) {
+		return RespondResult.build(500, "调用失败，进行回调");
+	}
+
 }

@@ -73,5 +73,11 @@ public class UserController {
 		return result;
 	}
 
-	
+	@ApiOperation(value = "发送验证码", notes = "发送验证码")
+	@RequestMapping(value = "/user/sendCode", method = RequestMethod.GET)
+	public RespondResult sendCode(@RequestParam("emailOrPhone") String emailOrPhone) {
+		RespondResult result = userService.sendCode(emailOrPhone);
+		return result;
+	}
+
 }

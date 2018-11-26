@@ -138,17 +138,31 @@ public class UserService {
 	@Transactional(readOnly = false)
 	public RespondResult registerUser(User user) {
 		try {
-			template.convertAndSend(Constants.REGISTERUSER_QUEUE, user.getMobile());
 			user.setId(IdGen.uuid());
 			user.setPassword(MD5.crypt(user.getPassword()));
 			userMapper.insert(user);
-			return RespondResult.build(200, null);
+			return RespondResult.ok();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return RespondResult.build(500, ExceptionUtil.getStackTrace(e));
 		}
 	}
 
+	/**
+	 * 检验手机或者Email 发送验证码
+	 * @param emailOrPhone
+	 * @return
+	 */
+	public RespondResult sendCode(String emailOrPhone) {
+		try {
+			System.err.println("================>"+emailOrPhone);
+			template.convertAndSend(Constants.REGISTERUSER_QUEUE, emailOrPhone);
+			return RespondResult.ok();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return RespondResult.build(500, ExceptionUtil.getStackTrace(e));
+		}
+	}
 	
 	
 }

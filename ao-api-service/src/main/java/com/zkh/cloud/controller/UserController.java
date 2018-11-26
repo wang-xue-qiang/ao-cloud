@@ -67,4 +67,12 @@ public class UserController {
 		return result;
 	}
 
+	@ApiOperation(value = "发送验证码", notes = "发送验证码")
+	@RequestMapping(value = "/user/sendCode", method = RequestMethod.GET)
+	public RespondResult sendCode(@RequestParam(value="emailOrPhone",defaultValue="592470261@qq.com") String emailOrPhone) {
+		RespondResult result = userFeignClient.sendCode(emailOrPhone);
+		return result;
+	}
+
+	
 }
