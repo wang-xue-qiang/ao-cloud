@@ -58,10 +58,17 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<!-- 微服务跟踪 add by wangxueqiang start -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-sleuth</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>net.logstash.logback</groupId>
 			<artifactId>logstash-logback-encoder</artifactId>
+			<version>4.8</version>
 			<scope>runtime</scope>
 		</dependency>
+		<!-- 微服务跟踪 add by wangxueqiang start -->
 	</dependencies>
 </project>
