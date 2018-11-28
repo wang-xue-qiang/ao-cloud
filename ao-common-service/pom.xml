@@ -77,10 +77,17 @@
 	        <version>${zookeeper.version}</version>
 	    </dependency>
 	    <!--分布式锁 封装jar start  -->
-	    <dependency>
+<!-- 	    <dependency>
 			<groupId>org.apache.curator</groupId>
 			<artifactId>curator-recipes</artifactId>
-		</dependency>
+		</dependency> -->
+		
+		
+		<dependency>
+    <groupId>org.redisson</groupId>
+    <artifactId>redisson</artifactId>
+    <version>3.5.0</version>
+</dependency>
 		<!--分布式锁 封装jar end  -->
 		
 		<!-- rabbitmq  start-->

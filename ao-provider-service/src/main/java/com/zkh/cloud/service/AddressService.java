@@ -15,8 +15,8 @@ import com.zkh.cloud.bean.Query;
 import com.zkh.cloud.bean.RespondResult;
 import com.zkh.cloud.dao.AddressMapper;
 import com.zkh.cloud.exeception.ExceptionUtil;
+import com.zkh.cloud.redis.JedisUtils;
 import com.zkh.cloud.utils.json.JsonUtils;
-import com.zkh.cloud.utils.redis.JedisUtils;
 import com.zkh.cloud.utils.string.IdGen;
 
 /**

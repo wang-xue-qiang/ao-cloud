@@ -20,4 +20,11 @@ public interface Constants {
 	public static final int UPLOAD_IMAGES=1;
 	public static final int UPLOAD_PDF=2;
 	
+	/**
+	 * 分布式锁
+	 */
+	public static final int WAITTIME = 100;//最多等待时间
+	public static final int LEASETIME = 100;//上锁后自动释放锁时间
+	public static final String LOCKER_PREFIX = "lock:";
+	public static final String SECKILL_ORDER = "seckill_order";
 }

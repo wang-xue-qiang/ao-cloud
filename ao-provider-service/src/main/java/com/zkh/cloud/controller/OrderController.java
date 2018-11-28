@@ -12,13 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.zkh.cloud.bean.Order;
 import com.zkh.cloud.bean.PageUtils;
 import com.zkh.cloud.bean.Query;
 import com.zkh.cloud.bean.RespondResult;
 import com.zkh.cloud.service.OrderService;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -36,7 +34,6 @@ public class OrderController {
 
 	@Autowired
 	private OrderService orderService;
-
 
 	@ApiOperation(value = "获取列表派单", notes = "获取列表派单")
 	@RequestMapping(value = "/order/list", method = {RequestMethod.POST,RequestMethod.GET})
@@ -71,6 +68,14 @@ public class OrderController {
 	@RequestMapping(value = "/order/delete", method = RequestMethod.POST)
 	public RespondResult deleteBatch(@RequestBody String[] ids) {
 		RespondResult result = orderService.deleteBatch(ids);
+		return result;
+	}
+	
+	
+	@ApiOperation(value = "秒单派单/分布式锁", notes = "秒单派单/分布式锁")
+	@RequestMapping(value = "/order/secKill", method = RequestMethod.GET)
+	public RespondResult secKill() {
+		RespondResult result = orderService.secKill();
 		return result;
 	}
 	
