@@ -71,12 +71,4 @@ public class OrderController {
 		return result;
 	}
 	
-	
-	@ApiOperation(value = "秒单派单/分布式锁", notes = "秒单派单/分布式锁")
-	@RequestMapping(value = "/order/secKill", method = RequestMethod.GET)
-	public RespondResult secKill() {
-		RespondResult result = orderService.secKill();
-		return result;
-	}
-	
 }

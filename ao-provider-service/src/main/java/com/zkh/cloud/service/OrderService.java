@@ -9,10 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.zkh.cloud.bean.Order;
 import com.zkh.cloud.bean.Query;
 import com.zkh.cloud.bean.RespondResult;
-import com.zkh.cloud.constant.Constants;
 import com.zkh.cloud.dao.OrderMapper;
 import com.zkh.cloud.exeception.ExceptionUtil;
-import com.zkh.cloud.redis.RedissLockUtil;
 import com.zkh.cloud.utils.string.IdGen;
 import com.zkh.cloud.utils.string.StringUtils;
 
@@ -26,8 +24,10 @@ import com.zkh.cloud.utils.string.StringUtils;
 @Service
 @Transactional(readOnly = true)
 public class OrderService {
+	
 	@Autowired
-	private OrderMapper orderMapper;	
+	private OrderMapper orderMapper;
+	
 	/**
 	 * 
 	 * @Description: 根据Id查询
@@ -78,7 +78,7 @@ public class OrderService {
 	
 	/**
 	 * 
-	 * @Description: ids长度唯一单独删除    ids长度大于1批量删除
+	 * @Description: 
 	 * @param order
 	 * @return
 	 * @author wangxueqiang
@@ -131,29 +131,5 @@ public class OrderService {
 		return RespondResult.ok();
 	}
 	
-	/**
-	 * 测试分布式锁，进行秒杀
-	 * @return
-	 */
-	public RespondResult secKill() {
-		//开启分布式锁，保证线程安全
-		try {
-		boolean success = RedissLockUtil.tryLock(Constants.LOCKER_PREFIX + Constants.SECKILL_ORDER, Constants.WAITTIME,Constants.LEASETIME);
-			if (success) {
-				try {
-					//成功逻辑处理
-				} finally {
-					RedissLockUtil.unlock(Constants.LOCKER_PREFIX + Constants.SECKILL_ORDER);
-				}
-				return RespondResult.ok("恭喜抢到派单！");
-			}else{
-				//失败逻辑处理
-				return RespondResult.ok("很遗憾,差一点就抢到了！");
-			}		
-		} catch (Exception e) {
-			e.printStackTrace();
-			return RespondResult.build(500, ExceptionUtil.getStackTrace(e));
-		} 
-	}
-
+	
 }
