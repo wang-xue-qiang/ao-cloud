@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.zkh.cloud.bean.OrderLock;
 import com.zkh.cloud.bean.RespondResult;
@@ -45,5 +46,5 @@ public interface GoodsFeignClient {
 
 
 	@RequestMapping(value = "/orderLock/testLock", method = RequestMethod.GET)
-	public RespondResult testLock(int type);
+	public RespondResult testLock(@RequestParam(value="type",defaultValue="1")int type);
 }

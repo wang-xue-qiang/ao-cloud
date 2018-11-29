@@ -62,4 +62,11 @@ public class OrderLock {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
+	@Override
+	public String toString() {
+		return "OrderLock [id=" + id + ", userId=" + userId + ", number=" + number + ", goods=" + goods
+				+ ", optimisticLock=" + optimisticLock + ", createTime=" + createTime + "]";
+	}
+    
 }

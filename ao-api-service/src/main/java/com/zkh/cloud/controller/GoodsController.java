@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.zkh.cloud.bean.OrderLock;
 import com.zkh.cloud.bean.RespondResult;
@@ -76,7 +77,7 @@ public class GoodsController {
 	
 	@ApiOperation(value = "高并发测试/1:分布式锁 2:乐观锁", notes = "高并发测试/1:分布式锁 2:乐观锁")
 	@RequestMapping(value = "/orderLock/testLock", method = RequestMethod.GET)
-	public RespondResult testLock(int type) {
+	public RespondResult testLock(@RequestParam(value="type",defaultValue="1")int type) {
 		RespondResult result = goodsFeignClient.testLock(type);
 		return result;
 	}

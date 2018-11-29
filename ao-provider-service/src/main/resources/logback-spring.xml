@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
   <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <logger name="org.springframework.web" level="INFO"/>
+    <logger name="org.springboot.sample" level="TRACE" />
+
+    <!-- 开发、测试环境 -->
+    <springProfile name="dev,uat">
+        <logger name="org.springframework.web" level="INFO"/>
+        <logger name="org.springboot.sample" level="INFO" />
+        <logger name="com.zkh" level="DEBUG" />
+    </springProfile>
+
+    <!-- 生产环境 -->
+    <springProfile name="pro">
+        <logger name="org.springframework.web" level="ERROR"/>
+        <logger name="org.springboot.sample" level="ERROR" />
+        <logger name="com.zkh" level="ERROR" />
+    </springProfile>
+ 
+ 
  
   <springProperty scope="context" name="springAppName" source="spring.application.name" />
   <!-- Example for logging into the build folder of your project -->
