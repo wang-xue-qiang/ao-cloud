@@ -20,7 +20,7 @@ import io.swagger.annotations.ApiOperation;
  * @date 2018年11月11日 下午8:24:14
  *
  */
-@Api(value = "orderLockController", description = "抢购品Api")
+@Api(value = "orderLockController", description = "分布式相关")
 @CrossOrigin
 @RestController
 public class GoodsController {
@@ -85,4 +85,12 @@ public class GoodsController {
 	}
 
 	
+	@ApiOperation(value = "LCN控制分布式事务", notes = "LCN控制分布式事务")
+	@RequestMapping(value = "/orderLock/tx", method = RequestMethod.GET)
+	public RespondResult lcnTransaction(
+			@RequestParam(value="goods",defaultValue="平板电脑")String goods,
+			@RequestParam(value="type",defaultValue="1")int type){
+		RespondResult result = goodsService.lcnTransaction( goods,type);
+		return result;
+	}
 }

@@ -2,6 +2,7 @@ package com.zkh.cloud.service;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -9,6 +10,8 @@ import java.util.concurrent.Executors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.codingapi.tx.annotation.TxTransaction;
 import com.zkh.cloud.bean.OrderLock;
 import com.zkh.cloud.bean.Query;
 import com.zkh.cloud.bean.RespondResult;
@@ -31,6 +34,7 @@ import com.zkh.cloud.utils.string.StringUtils;
 public class GoodsService {
 	@Autowired
 	private OrderLockMapper orderLockMapper;
+	
 	
 	/**
 	 * 
@@ -161,7 +165,6 @@ public class GoodsService {
 			boolean success = RedissLockUtil.tryLock(Constants.LOCKER_PREFIX + Constants.SECKILL_ORDER, Constants.WAITTIME,Constants.LEASETIME);
 			if (success) {
 				try {
-					System.err.println("获得锁的用户是："+userId);
 					OrderLock orderLock = orderLockMapper.selectOne();
 					if(orderLock.getNumber() == 0){
 						return RespondResult.ok("很遗憾,差一点就抢到了！");
@@ -204,7 +207,12 @@ public class GoodsService {
 			return RespondResult.build(500, ExceptionUtil.getStackTrace(e));
 		} 
 	}
-
+	
+	/**
+	 * 测试分布式锁
+	 * @param type 1是redis锁2是乐观锁
+	 * @return
+	 */
 	public RespondResult testLock(int type) {
 		try {
 			ExecutorService exec = Executors.newFixedThreadPool(10);
@@ -240,6 +248,30 @@ public class GoodsService {
 			}
 			// 退出线程池
 			exec.shutdown();
+			return RespondResult.ok();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return RespondResult.build(500, ExceptionUtil.getStackTrace(e));
+		} 
+	}
+
+	/**
+	 * 
+	 * @param from  转账人
+	 * @param to    接收人
+	 * @param number 金额
+	 * @return
+	 */
+    @TxTransaction(isStart = true)
+    @Transactional(readOnly = false)
+	public RespondResult lcnTransaction(String goods,int type){
+		try {
+			OrderLock record = new OrderLock (IdGen.uuid(),goods,new Date());
+			orderLockMapper.insert(record);
+			if(1== type){
+				@SuppressWarnings("unused")
+				int a = 1/0;
+			}
 			return RespondResult.ok();
 		} catch (Exception e) {
 			e.printStackTrace();

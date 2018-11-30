@@ -68,5 +68,20 @@ public class OrderLock {
 		return "OrderLock [id=" + id + ", userId=" + userId + ", number=" + number + ", goods=" + goods
 				+ ", optimisticLock=" + optimisticLock + ", createTime=" + createTime + "]";
 	}
+
+	public OrderLock() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public OrderLock(String id,  String goods,  Date createTime) {
+		super();
+		this.id = id;
+		this.goods = goods;
+		this.createTime = createTime;
+		this.number = 1;
+		this.optimisticLock = 0;
+	}
     
+	
 }

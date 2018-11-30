@@ -26,7 +26,7 @@ import io.swagger.annotations.ApiOperation;
  * @date 2018年11月11日 下午9:29:51
  *
  */
-@Api(value = "AddressController", description = "地址Api")
+@Api(value = "AddressController", description = "中国地址库（数据量大redis做缓存）")
 @CrossOrigin
 @RestController
 public class AddressController {

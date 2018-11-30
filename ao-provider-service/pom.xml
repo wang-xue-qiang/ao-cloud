@@ -12,6 +12,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<lcn.last.version>4.1.0</lcn.last.version>
 	</properties>
 
 	<dependencies>
@@ -70,5 +71,31 @@
 			<scope>runtime</scope>
 		</dependency>
 		<!-- 微服务跟踪 add by wangxueqiang start -->
+		
+		<!-- lcn 分布式事物 add by wangxueqiang start -->
+		<dependency>
+		   <groupId>com.codingapi</groupId>
+		   <artifactId>transaction-springcloud</artifactId>
+		   <version>${lcn.last.version}</version>
+		   <exclusions>
+		      <exclusion>
+		         <groupId>org.slf4j</groupId>
+		         <artifactId>*</artifactId>
+		      </exclusion>
+		   </exclusions>
+		</dependency>
+		<dependency>
+		   <groupId>com.codingapi</groupId>
+		   <artifactId>tx-plugins-db</artifactId>
+		   <version>${lcn.last.version}</version>
+		   <exclusions>
+		      <exclusion>
+		         <groupId>org.slf4j</groupId>
+		         <artifactId>*</artifactId>
+		      </exclusion>
+		   </exclusions>
+		</dependency>	
+		<!-- lcn 分布式事物  add by wangxueqiang end -->
+		
 	</dependencies>
 </project>
