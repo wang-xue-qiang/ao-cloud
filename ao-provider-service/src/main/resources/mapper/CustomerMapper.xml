@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zkh.cloud.dao.CustomerMapper" >
+  <resultMap id="BaseResultMap" type="com.zkh.cloud.bean.Customer" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="enable" property="enable" jdbcType="INTEGER" />
+    <result column="cus_name" property="cusName" jdbcType="VARCHAR" />
+    <result column="cus_no" property="cusNo" jdbcType="VARCHAR" />
+    <result column="industry" property="industry" jdbcType="BIGINT" />
+    <result column="cus_province" property="cusProvince" jdbcType="VARCHAR" />
+    <result column="cus_city" property="cusCity" jdbcType="VARCHAR" />
+    <result column="cus_district" property="cusDistrict" jdbcType="VARCHAR" />
+    <result column="cus_road" property="cusRoad" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="BIGINT" />
+    <result column="nature" property="nature" jdbcType="BIGINT" />
+    <result column="contact" property="contact" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="fax" property="fax" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="payment" property="payment" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="staff_id" property="staffId" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="CHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="staff_name" property="staffName" jdbcType="VARCHAR" />
+    <result column="staff_tel" property="staffTel" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, enable, cus_name, cus_no, industry, cus_province, cus_city, cus_district, cus_road, 
+    level, nature, contact, mobile, telephone, fax, email, payment, user_id, remark, 
+    staff_id, create_by, create_date, update_by, remarks, del_flag, update_date, staff_name, 
+    staff_tel
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zkh.cloud.bean.CustomerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ao_customer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ao_customer
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ao_customer
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zkh.cloud.bean.CustomerExample" >
+    delete from ao_customer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zkh.cloud.bean.Customer" >
+    insert into ao_customer (id, enable, cus_name, 
+      cus_no, industry, cus_province, 
+      cus_city, cus_district, cus_road, 
+      level, nature, contact, 
+      mobile, telephone, fax, 
+      email, payment, user_id, 
+      remark, staff_id, create_by, 
+      create_date, update_by, remarks, 
+      del_flag, update_date, staff_name, 
+      staff_tel)
+    values (#{id,jdbcType=VARCHAR}, #{enable,jdbcType=INTEGER}, #{cusName,jdbcType=VARCHAR}, 
+      #{cusNo,jdbcType=VARCHAR}, #{industry,jdbcType=BIGINT}, #{cusProvince,jdbcType=VARCHAR}, 
+      #{cusCity,jdbcType=VARCHAR}, #{cusDistrict,jdbcType=VARCHAR}, #{cusRoad,jdbcType=VARCHAR}, 
+      #{level,jdbcType=BIGINT}, #{nature,jdbcType=BIGINT}, #{contact,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{payment,jdbcType=BIGINT}, #{userId,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{staffId,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, 
+      #{delFlag,jdbcType=CHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{staffName,jdbcType=VARCHAR}, 
+      #{staffTel,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zkh.cloud.bean.Customer" >
+    insert into ao_customer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="enable != null" >
+        enable,
+      </if>
+      <if test="cusName != null" >
+        cus_name,
+      </if>
+      <if test="cusNo != null" >
+        cus_no,
+      </if>
+      <if test="industry != null" >
+        industry,
+      </if>
+      <if test="cusProvince != null" >
+        cus_province,
+      </if>
+      <if test="cusCity != null" >
+        cus_city,
+      </if>
+      <if test="cusDistrict != null" >
+        cus_district,
+      </if>
+      <if test="cusRoad != null" >
+        cus_road,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="nature != null" >
+        nature,
+      </if>
+      <if test="contact != null" >
+        contact,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="telephone != null" >
+        telephone,
+      </if>
+      <if test="fax != null" >
+        fax,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="payment != null" >
+        payment,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="staffId != null" >
+        staff_id,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="staffName != null" >
+        staff_name,
+      </if>
+      <if test="staffTel != null" >
+        staff_tel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null" >
+        #{enable,jdbcType=INTEGER},
+      </if>
+      <if test="cusName != null" >
+        #{cusName,jdbcType=VARCHAR},
+      </if>
+      <if test="cusNo != null" >
+        #{cusNo,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null" >
+        #{industry,jdbcType=BIGINT},
+      </if>
+      <if test="cusProvince != null" >
+        #{cusProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="cusCity != null" >
+        #{cusCity,jdbcType=VARCHAR},
+      </if>
+      <if test="cusDistrict != null" >
+        #{cusDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="cusRoad != null" >
+        #{cusRoad,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=BIGINT},
+      </if>
+      <if test="nature != null" >
+        #{nature,jdbcType=BIGINT},
+      </if>
+      <if test="contact != null" >
+        #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="payment != null" >
+        #{payment,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="staffId != null" >
+        #{staffId,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="staffName != null" >
+        #{staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="staffTel != null" >
+        #{staffTel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zkh.cloud.bean.CustomerExample" resultType="java.lang.Integer" >
+    select count(*) from ao_customer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ao_customer
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enable != null" >
+        enable = #{record.enable,jdbcType=INTEGER},
+      </if>
+      <if test="record.cusName != null" >
+        cus_name = #{record.cusName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cusNo != null" >
+        cus_no = #{record.cusNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.industry != null" >
+        industry = #{record.industry,jdbcType=BIGINT},
+      </if>
+      <if test="record.cusProvince != null" >
+        cus_province = #{record.cusProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cusCity != null" >
+        cus_city = #{record.cusCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cusDistrict != null" >
+        cus_district = #{record.cusDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cusRoad != null" >
+        cus_road = #{record.cusRoad,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level != null" >
+        level = #{record.level,jdbcType=BIGINT},
+      </if>
+      <if test="record.nature != null" >
+        nature = #{record.nature,jdbcType=BIGINT},
+      </if>
+      <if test="record.contact != null" >
+        contact = #{record.contact,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null" >
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telephone != null" >
+        telephone = #{record.telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fax != null" >
+        fax = #{record.fax,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payment != null" >
+        payment = #{record.payment,jdbcType=BIGINT},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.staffId != null" >
+        staff_id = #{record.staffId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createBy != null" >
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateBy != null" >
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null" >
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null" >
+        del_flag = #{record.delFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.updateDate != null" >
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.staffName != null" >
+        staff_name = #{record.staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.staffTel != null" >
+        staff_tel = #{record.staffTel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ao_customer
+    set id = #{record.id,jdbcType=VARCHAR},
+      enable = #{record.enable,jdbcType=INTEGER},
+      cus_name = #{record.cusName,jdbcType=VARCHAR},
+      cus_no = #{record.cusNo,jdbcType=VARCHAR},
+      industry = #{record.industry,jdbcType=BIGINT},
+      cus_province = #{record.cusProvince,jdbcType=VARCHAR},
+      cus_city = #{record.cusCity,jdbcType=VARCHAR},
+      cus_district = #{record.cusDistrict,jdbcType=VARCHAR},
+      cus_road = #{record.cusRoad,jdbcType=VARCHAR},
+      level = #{record.level,jdbcType=BIGINT},
+      nature = #{record.nature,jdbcType=BIGINT},
+      contact = #{record.contact,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      telephone = #{record.telephone,jdbcType=VARCHAR},
+      fax = #{record.fax,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      payment = #{record.payment,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      staff_id = #{record.staffId,jdbcType=VARCHAR},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      del_flag = #{record.delFlag,jdbcType=CHAR},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      staff_name = #{record.staffName,jdbcType=VARCHAR},
+      staff_tel = #{record.staffTel,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zkh.cloud.bean.Customer" >
+    update ao_customer
+    <set >
+      <if test="enable != null" >
+        enable = #{enable,jdbcType=INTEGER},
+      </if>
+      <if test="cusName != null" >
+        cus_name = #{cusName,jdbcType=VARCHAR},
+      </if>
+      <if test="cusNo != null" >
+        cus_no = #{cusNo,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null" >
+        industry = #{industry,jdbcType=BIGINT},
+      </if>
+      <if test="cusProvince != null" >
+        cus_province = #{cusProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="cusCity != null" >
+        cus_city = #{cusCity,jdbcType=VARCHAR},
+      </if>
+      <if test="cusDistrict != null" >
+        cus_district = #{cusDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="cusRoad != null" >
+        cus_road = #{cusRoad,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=BIGINT},
+      </if>
+      <if test="nature != null" >
+        nature = #{nature,jdbcType=BIGINT},
+      </if>
+      <if test="contact != null" >
+        contact = #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        fax = #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="payment != null" >
+        payment = #{payment,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="staffId != null" >
+        staff_id = #{staffId,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="staffName != null" >
+        staff_name = #{staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="staffTel != null" >
+        staff_tel = #{staffTel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zkh.cloud.bean.Customer" >
+    update ao_customer
+    set enable = #{enable,jdbcType=INTEGER},
+      cus_name = #{cusName,jdbcType=VARCHAR},
+      cus_no = #{cusNo,jdbcType=VARCHAR},
+      industry = #{industry,jdbcType=BIGINT},
+      cus_province = #{cusProvince,jdbcType=VARCHAR},
+      cus_city = #{cusCity,jdbcType=VARCHAR},
+      cus_district = #{cusDistrict,jdbcType=VARCHAR},
+      cus_road = #{cusRoad,jdbcType=VARCHAR},
+      level = #{level,jdbcType=BIGINT},
+      nature = #{nature,jdbcType=BIGINT},
+      contact = #{contact,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      fax = #{fax,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      payment = #{payment,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      staff_id = #{staffId,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=CHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      staff_name = #{staffName,jdbcType=VARCHAR},
+      staff_tel = #{staffTel,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <!-- 分页查询 add by  wangxueqiang  start -->
+  <select id="queryList" resultMap="BaseResultMap" parameterType="java.util.Map" >
+		select
+		<include refid="Base_Column_List" />
+		from ao_customer
+		<where>
+			<if test="cusName != null and cusName.trim() != ''">
+				and cus_name like concat('%',#{cusName},'%')
+			</if>
+		</where>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from ao_customer 
+		<where>
+			<if test="cusName != null and cusName.trim() != ''">
+				and cus_name like concat('%',#{cusName},'%')
+			</if>
+		</where>
+	</select>
+    <!-- 分页查询 add by  wangxueqiang  start -->   
+    
+    <!-- 批量删除 add by  wangxueqiang  start -->
+    <delete id="deleteBatch">
+		delete from ao_customer where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+    <!-- 批量删除add by  wangxueqiang  end -->
+  
+  	<!-- 初始化地图信息  add by  wangxueqiang  start -->
+  	<select id="initMapData" resultType="com.zkh.cloud.bean.dto.CustomerMap">
+		SELECT
+			a.cus_province  AS "name",
+			COUNT(id) AS "value"
+		FROM
+			ao_customer a
+		GROUP BY
+			a.cus_province
+	</select>
+	<!-- 初始化地图信息  add by  wangxueqiang  start -->
+</mapper>

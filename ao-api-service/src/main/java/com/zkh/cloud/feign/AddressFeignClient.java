@@ -30,4 +30,8 @@ public interface AddressFeignClient {
    
    @RequestMapping(value = "/addres/delete", method = RequestMethod.POST)
    public RespondResult deleteAddress(@RequestBody String[] ids);
+
+   @RequestMapping(value = "/address/findAddress/{parentCode}/{level}", method = RequestMethod.GET)
+   public RespondResult findAddress(@PathVariable("parentCode")String parentCode,@PathVariable("level")String level);
+   
 }

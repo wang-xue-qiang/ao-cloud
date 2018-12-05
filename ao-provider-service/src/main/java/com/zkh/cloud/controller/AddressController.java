@@ -35,13 +35,12 @@ public class AddressController {
 	private AddressService addressService;
 
 
-	@ApiOperation(value = "条件查询地址", notes = "条件查询地址")
-	@RequestMapping(value = "/address/findAddress", method = {RequestMethod.POST,RequestMethod.GET})
+
+	@ApiOperation(value = "省市区", notes = "省市区")
+	@RequestMapping(value = "/address/findAddress/{parentCode}/{level}", method = RequestMethod.GET)
 	@ResponseBody
-	public RespondResult findAddress(@RequestParam("parentCode")String parentCode,
-									 @RequestParam("level")String level,
-									 @RequestParam("delFlag")String delFlag) {		
-		RespondResult result = addressService.findAddress(parentCode, level, delFlag);
+	public RespondResult findAddress(@PathVariable("parentCode")String parentCode,@PathVariable("level")String level) {		
+		RespondResult result = addressService.findAddress(parentCode, level);
 		return result;
 	}
 

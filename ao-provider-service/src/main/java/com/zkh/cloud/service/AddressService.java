@@ -82,7 +82,7 @@ public class AddressService {
 	 * @date 2018年11月12日 下午5:13:26
 	 *
 	 */
-	public RespondResult findAddress(String parentCode,String level,String delFlag){
+	public RespondResult findAddress(String parentCode,String level){
 		//从缓存中取内容
 		try {
 			String result = JedisUtils.get(parentCode+"_"+level);
@@ -104,9 +104,7 @@ public class AddressService {
 		if(StringUtils.isNotEmpty(level)){	
 			c1.andLevelEqualTo(level);
 		}
-		if(StringUtils.isNotEmpty(delFlag)){	
-			c1.andDelFlagEqualTo(delFlag);
-		}
+
 		List<Address> list = addressMapper.selectByExample(example);	
 		//向缓存中添加内容
 		try {

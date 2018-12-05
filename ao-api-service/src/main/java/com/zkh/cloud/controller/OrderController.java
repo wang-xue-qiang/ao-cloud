@@ -27,7 +27,7 @@ import io.swagger.annotations.ApiOperation;
  * @date 2018年11月11日 下午9:29:51
  *
  */
-@Api(value = "OrderController", description = "派单Api")
+@Api(value = "OrderController", description = "派单信息相关Api")
 @CrossOrigin
 @RestController
 public class OrderController {
