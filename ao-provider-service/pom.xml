@@ -73,7 +73,7 @@
 		<!-- 微服务跟踪 add by wangxueqiang start -->
 		
 		<!-- lcn 分布式事物 add by wangxueqiang start -->
-		<dependency>
+<!-- 		<dependency>
 		   <groupId>com.codingapi</groupId>
 		   <artifactId>transaction-springcloud</artifactId>
 		   <version>${lcn.last.version}</version>
@@ -94,7 +94,7 @@
 		         <artifactId>*</artifactId>
 		      </exclusion>
 		   </exclusions>
-		</dependency>	
+		</dependency>	 -->
 		<!-- lcn 分布式事物  add by wangxueqiang end -->
 		
 	</dependencies>

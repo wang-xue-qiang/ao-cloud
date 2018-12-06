@@ -1,16 +1,16 @@
-package com.zkh.cloud.service;
+/*package com.zkh.cloud.service;
 
 import com.codingapi.tx.netty.service.TxManagerHttpRequestService;
 import com.lorne.core.framework.utils.http.HttpUtils;
 import org.springframework.stereotype.Service;
 
 
-/**
+*//**
  * lcn 事务控制
  * @author lenovo
  *
- */
-@Service
+ *//*
+//@Service
 public class TxManagerHttpRequestServiceImpl implements TxManagerHttpRequestService{
 
     @Override
@@ -29,3 +29,4 @@ public class TxManagerHttpRequestServiceImpl implements TxManagerHttpRequestServ
         return res;
     }
 }
+*/

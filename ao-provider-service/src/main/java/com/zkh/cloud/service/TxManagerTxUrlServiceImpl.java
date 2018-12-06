@@ -1,9 +1,9 @@
-package com.zkh.cloud.service;
+/*package com.zkh.cloud.service;
 
 import com.codingapi.tx.config.service.TxManagerTxUrlService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-@Service
+//@Service
 public class TxManagerTxUrlServiceImpl implements TxManagerTxUrlService{
 
 
@@ -16,3 +16,4 @@ public class TxManagerTxUrlServiceImpl implements TxManagerTxUrlService{
         return url;
     }
 }
+*/

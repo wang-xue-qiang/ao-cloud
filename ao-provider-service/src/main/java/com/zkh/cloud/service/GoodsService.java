@@ -2,7 +2,6 @@ package com.zkh.cloud.service;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.codingapi.tx.annotation.TxTransaction;
 import com.zkh.cloud.bean.OrderLock;
 import com.zkh.cloud.bean.Query;
 import com.zkh.cloud.bean.RespondResult;
@@ -262,7 +260,7 @@ public class GoodsService {
 	 * @param number 金额
 	 * @return
 	 */
-    @TxTransaction(isStart = true)
+/*    @TxTransaction(isStart = true)
     @Transactional(readOnly = false)
 	public RespondResult lcnTransaction(String goods,int type){
 		try {
@@ -277,6 +275,6 @@ public class GoodsService {
 			e.printStackTrace();
 			return RespondResult.build(500, ExceptionUtil.getStackTrace(e));
 		} 
-	}
+	}*/
 
 }
