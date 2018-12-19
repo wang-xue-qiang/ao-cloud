@@ -20,12 +20,14 @@ import com.zkh.cloud.utils.json.JsonUtils;
 import com.zkh.cloud.utils.string.IdGen;
 
 /**
- * 
- * @Description:省/市/区/街道/服务接口
- * @author wangxueqiang
- * @date 2018年11月11日 下午10:56:11
- *
- */
+* @Description:    省/市/区/街道/服务接口
+* @Author:          wangxueqiang
+* @CreateDate:     2018/12/19 10:41
+* @UpdateUser:     wangxueqiang
+* @UpdateDate:     2018/12/19 10:41
+* @UpdateRemark:   修改内容
+* @Version:         1.0
+*/
 @Service
 @Transactional(readOnly = true)
 public class AddressService {
