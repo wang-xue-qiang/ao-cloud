@@ -134,5 +134,6 @@
 		<module>ao-provider-service</module>
 		<module>ao-fileupload-service</module>
 		<module>ao-messge-notice-service</module>
-	</modules>
+        <module>ao-elasticsearch-service</module>
+    </modules>
 </project>
