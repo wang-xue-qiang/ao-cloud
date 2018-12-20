@@ -1,0 +1,8 @@
+
+spring:
+  data:
+    elasticsearch:
+      cluster-nodes: localhost:9300 # 配置IP及端口号
+      cluster-name: elasticsearch
+server:
+  port: 8888
